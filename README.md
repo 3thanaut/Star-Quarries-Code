@@ -3,4 +3,6 @@ This is all of the code for my first ever game, Star Quarries. I love this proje
 
 I completely recognize and understand that there are so many better methods, resources, and approaches I could have taken to this project, and that is why I am so grateful to be able to share it here. In this code, I will outline what to do, and what not to do to the best of my ability. What different resources could have been used, and what I would do when creating this project again.
 
+The wonderful thing about this, is that to my knowledge (and I have played through the game with friends multiple times) is that it works! There are so many improvements or things that could be done so much better, but this works! Amazing!
+
 Thank you for reading this, hope you enjoy!
