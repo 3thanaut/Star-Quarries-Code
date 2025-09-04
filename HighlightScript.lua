@@ -1,7 +1,14 @@
+--[[
+	Welcome! This is the client sided highlight script that would draw a white outline around rocks.
+	This program changes the highlight colour to be gradually more red dependant on the targets health.
+	Updated comments will be marked with a capital U at the start.
+]]--
+
+
 local mouse = game.Players.LocalPlayer:GetMouse()
 local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
 
---raycast function
+-- U This is what we will call to get a ray object which we should be able to derive the target instance from.
 local function rayCast(rayDest, rayLength, ignorePart)
 	
 	if character == nil then return end
@@ -22,6 +29,8 @@ local function rayCast(rayDest, rayLength, ignorePart)
 
 	--raycast to check if the player is actually hitting something
 	local ray = workspace:Raycast(rayOrigin, rayDirection * rayLength, rayParams)
+
+	-- U this returns the entire ray object, we could just return the target.
 	return ray
 end
 
@@ -30,10 +39,19 @@ end
 local highlighter = nil
 local toolHighlight = nil
 
+--[[ U
+	this program constantly runs once per frame, instead of using while, it would be better to use heartbeat service.
+
+	runservice.HeartBeat:Connect(function()
+		then put everything in here :D
+	end)
+]]--
 while true do
 
+	-- U should define that 10 is the ray distance.
 	local ray = rayCast(mouse.Hit.Position, 10)
 
+	-- U good to check if the ray exists! The instance is not returned if it hits nothing.
 	if ray then
 
 		if ray.Instance:GetAttribute("hp") ~= nil then
@@ -43,6 +61,10 @@ while true do
 			local maxHp = rockAttributes:GetAttribute("hp")
 			local subtractVal = (maxHp - currentHp)/maxHp
 
+			--[[ U 
+				because the highlighter object can only exist with up to 30 instances at once, they need to be cleared.
+				instead of doing this in cases, one highlighter object should be defined and reparented as appropriate instead of creating a new instance every reselection.
+			]]--
 			if highlighter == nil then
 
 				local highlight = Instance.new("Highlight")
@@ -78,7 +100,11 @@ while true do
 			local outline = ray.Instance.Parent:FindFirstChild("Outline")
 			
 			if outline then
-				
+
+				--[[ U
+					This was a bandaid fix for a problem as a product of disorganization. Having a consistent system where all primary parts have an attribute would
+					have made much more sense with the current context. Outlines usually mean there is a tool or some form of interactable instance.
+				]]--
 				if outline:GetAttribute("type") ~= nil then
 					
 					if outline:GetAttribute("type") == "pickaxe" then
