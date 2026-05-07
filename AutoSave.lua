@@ -1,3 +1,5 @@
+--[[SERVER SCRIPT: SERVER SCRIPT SERVICE]]--
+
 local playerService = game:GetService("Players")
 local players
 local saveEvent = game:GetService("ReplicatedStorage")["BindableEvents"]:FindFirstChild("SaveQueue")
